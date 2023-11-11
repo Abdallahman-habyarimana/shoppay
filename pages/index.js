@@ -1,9 +1,12 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const { data: session} = useSession()
+  console.log(session);
   return (
     <>
       <Head>
@@ -13,7 +16,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Welcome</h1>
-      <button>Click me</button>
+      {
+        session ? 'You are logged in' : "you are not logged in"
+      }
     </>
   )
 }
